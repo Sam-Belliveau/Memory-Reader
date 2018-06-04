@@ -5,6 +5,8 @@
 #include "printData.h"
 #include <iostream>
 
-void printMemory(BYTE* input, const QWORD length, const QWORD lineLength);
+BYTE* getPtr(const QWORD addr);
+BYTE getAddress(const QWORD addr);
+void printMemory(const QWORD start, const QWORD end, const QWORD lineLength);
 
 #endif

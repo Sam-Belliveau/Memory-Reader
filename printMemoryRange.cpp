@@ -1,15 +1,22 @@
 #include "include/printMemoryRange.h"
 
-void printMemory(BYTE* input, const QWORD length, const QWORD lineLength)
+
+BYTE* getPtr(const QWORD addr)
+{ return ((BYTE*) addr); }
+
+BYTE getAddress(const QWORD addr)
+{ return (getPtr(addr)[0]); }
+
+void printMemory(const QWORD start, const QWORD end, const QWORD lineLength)
 {
-  for(QWORD i = 0; i < length; i += lineLength)
+  for(QWORD i = start; i < end; i += lineLength)
   {
-    printQuadHex((QWORD)std::addressof(input[i]));
+    printQuadHex(i);
     std::cout << ": ";
 
     for(QWORD j = 0; j < lineLength; j++)
     {
-      printByteHex(input[i+j]);
+      printByteHex(getAddress(i+j));
       std::cout << " ";
     }
 
@@ -17,7 +24,7 @@ void printMemory(BYTE* input, const QWORD length, const QWORD lineLength)
 
     for(QWORD j = 0; j < lineLength; j++)
     {
-      printByteLet(input[i+j]);
+      printByteLet(getAddress(i+j));
       std::cout << " ";
     }
 
